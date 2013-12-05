@@ -1,0 +1,8 @@
+config/application.yml
+
+bin/
+log/
+tmp/
+
+.sass-cache/
+.bundle/

@@ -1,0 +1,34 @@
+!!! 5
+%html
+  %head
+    %base{href: '/'}
+    %title Group Play
+
+    %link{href: stylesheet_path('application.css'), rel: 'stylesheet'}
+
+    %script{src: javascript_path('vendor/angular.js')}
+    %script{src: javascript_path('vendor/event_source.js')}
+    %script{src: javascript_path('application.js')}
+
+    :javascript
+      !function(configs){
+        function parse(s){ try { return JSON.parse(s); } catch(e) { return null; } }
+
+        var playlist_json = [];
+        var playlist = #{playlist};
+
+        angular.forEach(playlist, function(str){
+          var json = parse(str);
+
+          if (json) playlist_json.push(json);
+        });
+
+        configs.constant('playerData', {
+          playlist: playlist_json, nowPlaying: #{now_playing}
+        });
+      }(angular.module('gp'));
+
+  %body{ng: {app: 'gp'}}
+    %div{ng: {view: true}}
+
+    = yield

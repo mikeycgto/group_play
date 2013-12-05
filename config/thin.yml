@@ -1,0 +1,7 @@
+environment: production
+address: 0.0.0.0
+port: 8000
+max_conns: 1024
+timeout: 30
+max_persistent_conns: 512
+daemonize: true

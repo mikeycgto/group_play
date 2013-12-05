@@ -1,0 +1,22 @@
+%script{id: 'playlist.html', type: 'text/ng-template'}
+  %h1 Now Playing
+  %h2{ng: {if: 'nowPlaying == null'}} Nothing Playing
+  %div{ng: {if: 'nowPlaying != null'}}
+    %h2 {{nowPlaying.title}}
+    %h3 {{nowPlaying.artist}} - {{nowPlaying.album}}
+  %div{ng: {if: 'nowPlayingTime != null'}}
+    .progress-bar {{ nowPlayingTime.time / nowPlayingTime.duration | percentage}}
+
+  %h1 Playlist
+  %ul
+    %li{ng: {repeat: 'track in playlist'}}
+      %h2 {{track.title}}
+      %h3 {{track.artist}} - {{track.album}}
+
+  %a{href: '/upload'} Upload
+
+%script{id: 'upload.html', type: 'text/ng-template'}
+  %form
+    %label File
+    %input{type: 'file', name: 'file'}
+    %button{ng: {click: 'upload()'}} Upload
